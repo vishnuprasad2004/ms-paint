@@ -6,6 +6,10 @@ import javax.swing.JFrame;
 
 public class MyFrame extends JFrame {
 
+    private DrawPanel drawPanel;
+    private ToolPanel toolPanel;
+    private Footer footer;
+
     public MyFrame() {
         setTitle("MS Paint | Mera Sasta Paint");
         setVisible(true);
@@ -14,14 +18,16 @@ public class MyFrame extends JFrame {
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        MyMenuBar menu = new MyMenuBar();
-        setJMenuBar(menu);
-
+        
         ToolPanel panel1 = new ToolPanel();
         getContentPane().add(panel1, BorderLayout.NORTH);
-
+        
         DrawPanel drawPanel = new DrawPanel();
         getContentPane().add(drawPanel, BorderLayout.CENTER);
+        this.drawPanel = drawPanel;
+        
+        MyMenuBar menu = new MyMenuBar(this, drawPanel);
+        setJMenuBar(menu);
 
         Footer footer = new Footer();
         getContentPane().add(footer, BorderLayout.SOUTH);
@@ -29,5 +35,11 @@ public class MyFrame extends JFrame {
         pack();
 
     }
+
+    public DrawPanel getDrawPanel() {
+        return this.drawPanel;
+    }
+
+
 
 }
